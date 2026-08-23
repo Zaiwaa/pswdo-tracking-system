@@ -1,0 +1,3095 @@
+<style> 
+:root{ 
+--glass: rgba(255,255,255,.60); 
+--glass-strong: rgba(255,255,255,.76); 
+--glass-soft: rgba(255,255,255,.42); 
+--stroke: rgba(255,255,255,.35); 
+--text: #1f2937; 
+--muted: #6b7280; 
+--primary: #16a34a; 
+--primary-dark: #15803d; 
+--blue-1: #1e40af; 
+--blue-2: #2563eb; 
+--blue-text: #eff6ff; 
+--danger: #dc2626; 
+--warning: #d97706; 
+--info: #2563eb; 
+--shadow: 0 10px 30px rgba(31,41,55,.12); 
+--shadow-soft: 0 8px 24px rgba(31,41,55,.08); 
+--radius-xl: 24px; 
+--radius-lg: 18px; 
+--radius-md: 14px; 
+--radius-sm: 12px; 
+--program-lydo-bg: #dbeafe; 
+--program-lydo-text: #315fba; 
+--program-lydo-border: #bfdbfe; 
+--program-cso-bg: #fef3c7; 
+--program-cso-text: #a16207; 
+--program-cso-border: #fde68a; 
+--program-disaster-bg: #fce7f3; 
+--program-disaster-text: #be5e94; 
+--program-disaster-border: #fbcfe8; 
+--program-ccdc-bg: #ffedd5; 
+--program-ccdc-text: #c46b2f; 
+--program-ccdc-border: #fed7aa; 
+--program-pcic-bg: #fee2e2; 
+--program-pcic-text: #c15c5c; 
+--program-pcic-border: #fecaca; 
+--program-admin-bg: #dcfce7; 
+--program-admin-text: #2f8f57; 
+--program-admin-border: #bbf7d0; 
+--program-default-bg: #f1f5f9; 
+--program-default-text: #64748b; 
+--program-default-border: #e2e8f0; 
+} 
+html, body{ 
+margin:0; 
+padding:0; 
+width:100%; 
+min-height:100%; 
+overflow-x:hidden; 
+} 
+html.panel-open, 
+body.panel-open{ 
+overflow:hidden !important; 
+overscroll-behavior:none; 
+} 
+.doc-shell, 
+.control-card, 
+.table-wrap, 
+.records-table, 
+.modal-content, 
+.form-section, 
+.details-grid{ 
+min-width:0; 
+} 
+.doc-shell{ 
+display:flex; 
+flex-direction:column; 
+gap:20px; 
+} 
+.doc-hero{ 
+display:flex; 
+justify-content:space-between; 
+align-items:flex-start; 
+gap:16px; 
+padding:24px; 
+border-radius:28px; 
+background:var(--glass); 
+backdrop-filter:blur(16px); 
+-webkit-backdrop-filter:blur(16px); 
+border:1px solid var(--stroke); 
+box-shadow:var(--shadow); 
+} 
+.doc-header h1{ 
+color:#0f172a; 
+margin:0 0 6px 0; 
+font-size:36px; 
+line-height:1.05; 
+font-weight:700; 
+} 
+.doc-header p{ 
+color:var(--muted); 
+font-size:14px; 
+margin:0; 
+} 
+.hero-badge{ 
+display:inline-flex; 
+align-items:center; 
+gap:8px; 
+padding:10px 14px; 
+border-radius:999px; 
+background:rgba(22,163,74,.12); 
+color:#166534; 
+font-weight:600; 
+font-size:13px; 
+white-space:nowrap; 
+} 
+.control-card{ 
+border-radius:var(--radius-xl); 
+background:var(--glass-strong); 
+backdrop-filter:blur(18px); 
+-webkit-backdrop-filter:blur(18px); 
+border:1px solid var(--stroke); 
+box-shadow:var(--shadow); 
+padding:20px; 
+} 
+.action-bar{ 
+display:flex; 
+align-items:center; 
+justify-content:space-between; 
+gap:16px; 
+width:100%; 
+flex-wrap:wrap; 
+} 
+.btn{ 
+height:46px; 
+padding:0 16px; 
+border:none; 
+border-radius:14px; 
+cursor:pointer; 
+transition:all .2s ease; 
+font-weight:600; 
+font-family:'Poppins',sans-serif; 
+} 
+.btn:hover{ 
+transform:translateY(-1px); 
+} 
+.btn-primary{ 
+background:linear-gradient(135deg,var(--primary),var(--primary-dark)); 
+color:white; 
+box-shadow:0 10px 24px rgba(22,163,74,.22); 
+} 
+.btn-outline{ 
+background:rgba(255,255,255,.82); 
+border:1px solid rgba(31,41,55,.08); 
+color:#34495e; 
+} 
+.search-group, 
+.filter-group{ 
+display:flex; 
+gap:10px; 
+flex-wrap:wrap; 
+align-items:center; 
+} 
+.form-control, 
+.search-input, 
+.search-select{ 
+height:46px; 
+padding:0 14px; 
+border:1px solid rgba(31,41,55,.08); 
+border-radius:14px; 
+width:100%; 
+box-sizing:border-box; 
+background:rgba(255,255,255,.72); 
+outline:none; 
+color:var(--text); 
+font-family:'Poppins',sans-serif; 
+box-shadow:inset 0 1px 0 rgba(255,255,255,.4); 
+} 
+.form-control:focus, 
+.search-input:focus, 
+.search-select:focus, 
+textarea.form-control:focus{ 
+border-color:rgba(37,99,235,.30); 
+box-shadow:0 0 0 4px rgba(37,99,235,.10); 
+} 
+.search-input{ 
+min-width:250px; 
+} 
+.records-desktop-wrap{ 
+display:block; 
+} 
+.records-mobile-list{ 
+display:none; 
+flex-direction:column; 
+gap:12px; 
+margin-top:14px; 
+} 
+.record-mobile-card{ 
+background:rgba(255,255,255,.72); 
+border:1px solid rgba(31,41,55,.08); 
+border-radius:18px; 
+padding:14px; 
+box-shadow:var(--shadow-soft); 
+border-left:6px solid transparent; 
+} 
+.record-mobile-card.approved-row{ 
+background:rgba(22,163,74,.10) !important; 
+} 
+.record-mobile-card.program-lydo{ border-left-color: var(--program-lydo-text); } 
+.record-mobile-card.program-cso{ border-left-color: var(--program-cso-text); } 
+.record-mobile-card.program-disaster{ border-left-color: var(--program-disaster-text); } 
+.record-mobile-card.program-ccdc{ border-left-color: var(--program-ccdc-text); } 
+.record-mobile-card.program-pcic{ border-left-color: var(--program-pcic-text); } 
+.record-mobile-card.program-admin{ border-left-color: var(--program-admin-text); } 
+.record-mobile-card.program-default{ border-left-color: var(--program-default-text); } 
+.record-mobile-top{ 
+display:flex; 
+justify-content:space-between; 
+align-items:flex-start; 
+gap:10px; 
+margin-bottom:12px; 
+} 
+.record-mobile-title{ 
+font-size:14px; 
+font-weight:700; 
+color:#0f172a; 
+line-height:1.3; 
+word-break:break-word; 
+} 
+.record-mobile-actions{ 
+display:flex; 
+gap:8px; 
+flex-shrink:0; 
+} 
+.record-mobile-grid{ 
+display:grid; 
+grid-template-columns:1fr; 
+gap:8px; 
+} 
+.record-mobile-row{ 
+display:flex; 
+flex-direction:column; 
+gap:2px; 
+} 
+.record-mobile-label{ 
+font-size:11px; 
+font-weight:700; 
+text-transform:uppercase; 
+letter-spacing:.04em; 
+color:#64748b;
+} 
+.record-mobile-value{ 
+font-size:13px; 
+color:#1f2937; 
+word-break:break-word;
+} 
+.record-mobile-status{ 
+margin-top:6px; 
+padding-top:10px; 
+border-top:1px solid rgba(148,163,184,.18); 
+} 
+.table-wrap{ 
+width:100%; 
+overflow-x:auto; 
+overflow-y:hidden; 
+-webkit-overflow-scrolling:touch; 
+border-radius:18px; 
+background:rgba(255,255,255,.42); 
+border:1px solid rgba(255,255,255,.34); 
+} 
+.records-table{ 
+width:100%; 
+border-collapse:separate; 
+border-spacing:0; 
+min-width:1100px; 
+padding-top:20px; 
+} 
+.records-table thead{ 
+background:linear-gradient(135deg,var(--blue-1),var(--blue-2)); 
+} 
+.records-table thead th{ 
+background:transparent; 
+color:var(--blue-text); 
+padding:15px 16px; 
+text-align:left; 
+font-size:13px; 
+font-weight:600; 
+letter-spacing:.02em; 
+white-space:nowrap; 
+position:sticky; 
+top:0; 
+z-index:2; 
+border-bottom:1px solid rgba(255,255,255,.16); 
+} 
+.records-table th.action-column,
+.records-table td.action-column{
+    width:120px;
+    min-width:120px;
+}
+.records-table td.action-column{
+    background:rgba(255,255,255,.28);
+}
+.records-table tbody tr:nth-child(even) td.action-column{
+    background:rgba(255,255,255,.20);
+}
+.records-table tbody tr.approved-row td.action-column{
+    background:rgba(22,163,74,.10) !important;
+}
+.records-table tbody tr:hover td.action-column{
+    background:rgba(255,255,255,.54);
+}
+.records-table thead th:last-child{ 
+border-top-right-radius:14px; 
+} 
+.records-table td{ 
+  
+padding:14px 16px; 
+border-top:1px solid rgba(148,163,184,.16); 
+vertical-align:top; 
+font-size:14px; 
+color:#1f2937; 
+background:rgba(255,255,255,.28); 
+} 
+
+.records-table th:first-child,
+.records-table td:first-child{
+    width:120px !important;
+    min-width:120px !important;
+    max-width:120px !important;
+}
+
+.records-table tbody tr:nth-child(even) td{ 
+background:rgba(255,255,255,.20); 
+} 
+.records-table tbody tr:hover td{ 
+background:rgba(255,255,255,.54); 
+} 
+.approved-row td{ 
+background:rgba(22,163,74,.10) !important; 
+} 
+.action-cell{ 
+display:flex; 
+gap:8px; 
+flex-wrap:wrap;
+align-items:center;
+justify-content:flex-start; 
+} 
+.action-btn{ 
+border:none; 
+color:white; 
+width:30px; 
+height:30px; 
+border-radius:10px; 
+cursor:pointer; 
+font-size:10px; 
+display:inline-flex; 
+align-items:center; 
+justify-content:center; 
+padding:0; 
+transition:all .2s ease; 
+box-shadow:var(--shadow-soft); 
+} 
+.action-btn:hover{ 
+transform:translateY(-1px) scale(1.02); 
+} 
+.action-btn:disabled{ 
+opacity:.5; 
+cursor:not-allowed; 
+transform:none; 
+} 
+.view-btn{ background:linear-gradient(135deg,#3b82f6,#2563eb); } 
+.edit-btn{ background:linear-gradient(135deg,#f59e0b,#d97706); } 
+.delete-btn{ background:linear-gradient(135deg,#ef4444,#dc2626); } 
+.empty-state{ 
+text-align:center; 
+color:var(--muted); 
+padding:24px; 
+background:rgba(255,255,255,.45); 
+} 
+.pagination{ 
+margin-top:18px; 
+display:flex; 
+justify-content:center; 
+gap:10px; 
+flex-wrap:wrap; 
+} 
+.page-btn{ 
+min-width:40px; 
+height:40px; 
+padding:0 12px; 
+border:1px solid rgba(31,41,55,.08); 
+background:rgba(255,255,255,.82); 
+border-radius:12px; 
+cursor:pointer; 
+font-weight:600; 
+color:#334155; 
+} 
+.page-btn.active{ 
+background:linear-gradient(135deg,var(--primary),var(--primary-dark)); 
+color:white; 
+border-color:transparent; 
+box-shadow:0 10px 24px rgba(22,163,74,.20); 
+} 
+.modal{ 
+display:none; 
+position:fixed !important; 
+inset:0 !important; 
+width:100vw !important; 
+height:100vh !important; 
+height:100dvh !important; 
+z-index:2147483647 !important; 
+background:rgba(15,23,42,.30); 
+overflow:hidden !important; 
+} 
+.modal.modal-active{ 
+display:block !important; 
+} 
+.modal-content{ 
+position:fixed !important; 
+inset:0 !important; 
+width:100vw !important; 
+height:100vh !important; 
+height:100dvh !important; 
+max-width:none !important; 
+max-height:none !important; 
+margin:0 !important; 
+border-radius:0 !important; 
+background:rgba(255,255,255,.98); 
+overflow-y:auto !important; 
+overflow-x:hidden !important; 
+-webkit-overflow-scrolling:touch; 
+box-sizing:border-box; 
+padding:20px 16px calc(28px + env(safe-area-inset-bottom)) 16px !important; 
+box-shadow:none !important; 
+transform:translateZ(0); 
+} 
+.modal-header{ 
+display:flex; 
+justify-content:space-between; 
+align-items:center; 
+gap:12px; 
+margin-bottom:16px; 
+padding-bottom:12px; 
+position:sticky; 
+top:0; 
+z-index:10; 
+background:rgba(255,255,255,.98); 
+border-bottom:1px solid rgba(148,163,184,.20); 
+} 
+.modal-header h2{ 
+font-size:22px; 
+color:#0f172a; 
+font-weight:700; 
+margin:0; 
+} 
+.close-btn{ 
+width:40px; 
+height:40px; 
+border-radius:12px; 
+display:inline-flex; 
+align-items:center; 
+justify-content:center; 
+font-size:22px; 
+cursor:pointer; 
+background:#fff; 
+border:1px solid rgba(31,41,55,.08); 
+transition:.2s ease; 
+flex-shrink:0; 
+} 
+.close-btn:hover{ 
+background:#fff; 
+} 
+.form-section{ 
+background:rgba(255,255,255,.48); 
+border:1px solid rgba(255,255,255,.36); 
+border-radius:20px; 
+padding:20px; 
+margin-bottom:20px; 
+box-shadow:var(--shadow-soft); 
+} 
+.form-section h3{ 
+color:#0f172a; 
+font-size:18px; 
+font-weight:700; 
+margin:0 0 14px 0; 
+} 
+.form-grid{ 
+display:grid; 
+grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); 
+gap:16px; 
+} 
+.form-group label{ 
+display:block; 
+margin-bottom:8px; 
+font-weight:600; 
+color:#334155; 
+font-size:14px; 
+} 
+textarea.form-control{ 
+height:auto; 
+min-height:100px; 
+padding:12px 14px; 
+resize:vertical; 
+} 
+.check-grid, 
+.routing-grid{ 
+display:grid; 
+grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); 
+gap:12px; 
+} 
+.check-grid label{ 
+display:flex; 
+align-items:center; 
+gap:10px; 
+white-space:normal; 
+padding:12px 14px; 
+border-radius:14px; 
+background:rgba(255,255,255,.72); 
+border:1px solid rgba(31,41,55,.06); 
+transition:.2s ease; 
+cursor:pointer; 
+} 
+.check-grid label:hover{ 
+background:rgba(255,255,255,.95); 
+} 
+.check-grid input{ 
+accent-color:#2563eb; 
+width:16px; 
+height:16px; 
+} 
+.routing-item{ 
+display:flex; 
+flex-direction:column; 
+gap:8px; 
+padding:12px 14px; 
+border-radius:14px; 
+background:rgba(255,255,255,.72); 
+border:1px solid rgba(31,41,55,.06); 
+} 
+.routing-main{ 
+display:flex; 
+align-items:center; 
+gap:10px; 
+cursor:pointer; 
+} 
+.routing-main input{ 
+accent-color:#2563eb; 
+width:16px; 
+height:16px; 
+} 
+.routing-main span{ 
+color:#1f2937; 
+font-size:14px; 
+font-weight:500; 
+} 
+.routing-extra,
+.routing-time{ 
+width:100%; 
+height:42px; 
+padding:0 12px; 
+border:1px solid rgba(31,41,55,.08); 
+border-radius:12px; 
+background:rgba(255,255,255,.92); 
+color:#1f2937; 
+font-family:'Poppins',sans-serif; 
+font-size:13px; 
+box-sizing:border-box; 
+} 
+.routing-extra:disabled,
+.routing-time:disabled{ 
+opacity:.6; 
+background:rgba(241,245,249,.85); 
+cursor:not-allowed; 
+} 
+.routing-extra:focus,
+.routing-time:focus{ 
+outline:none; 
+border-color:rgba(37,99,235,.30); 
+box-shadow:0 0 0 4px rgba(37,99,235,.10); 
+} 
+.amount-wrap{ 
+position:relative; 
+} 
+.amount-prefix{ 
+position:absolute; 
+left:14px; 
+top:50%; 
+transform:translateY(-50%); 
+color:#475569; 
+font-weight:600; 
+font-size:14px; 
+pointer-events:none; 
+z-index:1; 
+} 
+.amount-input{ 
+padding-left:34px !important; 
+} 
+.required{ 
+color:#dc2626; 
+} 
+.details-grid{ 
+display:grid; 
+grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); 
+gap:14px; 
+} 
+.details-card{ 
+background:rgba(255,255,255,.70); 
+border:1px solid rgba(31,41,55,.06); 
+border-radius:16px; 
+padding:14px; 
+} 
+.details-card strong{ 
+display:block; 
+color:#0f172a; 
+margin-bottom:6px; 
+font-size:13px; 
+} 
+.details-card span, 
+.details-card div{ 
+color:#334155; 
+font-size:14px; 
+word-break:break-word;
+} 
+.details-full{ 
+grid-column:1 / -1; 
+} 
+.history-list{ 
+display:flex; 
+flex-direction:column; 
+gap:10px; 
+} 
+.history-item{
+padding:14px 16px; 
+border-radius:14px; 
+background:rgba(255,255,255,.72); 
+border:1px solid rgba(31,41,55,.06); 
+} 
+.history-item-title{ 
+font-weight:700; 
+color:#0f172a; 
+margin-bottom:4px; 
+} 
+.history-item-meta{ 
+font-size:13px; 
+color:#64748b; 
+} 
+.current-status-cell{ 
+min-width:190px; 
+} 
+.current-status-cell .history-item-title{ 
+font-weight:700; 
+color:#0f172a; 
+margin-bottom:2px; 
+line-height:1.3; 
+} 
+.current-status-cell .history-item-meta{ 
+font-size:12px; 
+color:#64748b; 
+line-height:1.2; 
+} 
+.checklist-bullets{ 
+margin:0; 
+padding-left:20px; 
+color:#334155; 
+font-size:14px; 
+} 
+.checklist-bullets li{ 
+margin-bottom:6px; 
+} 
+.checklist-bullets li:last-child{ 
+margin-bottom:0; 
+} 
+.program-cell{ 
+text-align:center; 
+vertical-align:middle; 
+} 
+.program-badge{ 
+display:inline-flex; 
+align-items:center; 
+justify-content:center; 
+min-width:86px; 
+padding:8px 14px; 
+border-radius:999px; 
+font-size:12px; 
+font-weight:700; 
+border:1px solid transparent; 
+line-height:1; 
+white-space:nowrap; 
+box-shadow:0 4px 10px rgba(15,23,42,.05); 
+} 
+.program-badge.lydo{ 
+background:var(--program-lydo-bg); 
+color:var(--program-lydo-text); 
+border-color:var(--program-lydo-border); 
+} 
+.program-badge.cso{ 
+background:var(--program-cso-bg); 
+color:var(--program-cso-text); 
+border-color:var(--program-cso-border); 
+} 
+.program-badge.disaster{ 
+background:var(--program-disaster-bg); 
+color:var(--program-disaster-text); 
+border-color:var(--program-disaster-border); 
+} 
+.program-badge.ccdc{ 
+background:var(--program-ccdc-bg); 
+color:var(--program-ccdc-text); 
+border-color:var(--program-ccdc-border); 
+} 
+.program-badge.pcic{ 
+background:var(--program-pcic-bg); 
+color:var(--program-pcic-text); 
+border-color:var(--program-pcic-border); 
+} 
+.program-badge.admin{ 
+background:var(--program-admin-bg); 
+color:var(--program-admin-text); 
+border-color:var(--program-admin-border); 
+} 
+.program-badge.default{ 
+background:var(--program-default-bg); 
+color:var(--program-default-text); 
+border-color:var(--program-default-border); 
+} 
+.records-table td, 
+.details-card div, 
+.details-card span, 
+.history-item-meta, 
+.history-item-title{ 
+word-break:break-word; 
+} 
+.filter-select-wrap{ 
+position:relative; 
+min-width:220px; 
+} 
+.filter-select{ 
+appearance:none; 
+-webkit-appearance:none; 
+-moz-appearance:none; 
+width:100%; 
+height:48px; 
+padding:0 44px 0 16px; 
+border-radius:16px; 
+border:1px solid rgba(31,41,55,.08); 
+background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.70)); 
+color:#1f2937; 
+font-family:'Poppins',sans-serif; 
+font-size:14px; 
+font-weight:500; 
+outline:none; 
+box-shadow: 
+inset 0 1px 0 rgba(255,255,255,.45), 
+0 8px 20px rgba(15,23,42,.06); 
+cursor:pointer; 
+transition:all .2s ease; 
+} 
+.filter-select:hover{ 
+background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.78)); 
+border-color:rgba(37,99,235,.16); 
+transform:translateY(-1px); 
+} 
+.filter-select:focus{ 
+border-color:rgba(37,99,235,.30); 
+box-shadow: 
+0 0 0 4px rgba(37,99,235,.10), 
+0 10px 24px rgba(37,99,235,.10); 
+} 
+.filter-select-wrap::after{ 
+content:"\f078"; 
+font-family:"Font Awesome 6 Free"; 
+font-weight:900; 
+position:absolute; 
+right:16px; 
+top:50%; 
+transform:translateY(-50%); 
+font-size:12px; 
+color:#64748b; 
+pointer-events:none; 
+transition:transform .2s ease, color .2s ease; 
+} 
+.filter-select-wrap:hover::after{ 
+color:#2563eb; 
+} 
+.filter-select-wrap:focus-within::after{ 
+color:#2563eb; 
+transform:translateY(-50%) rotate(180deg); 
+} 
+.modal-footer{ 
+display:flex; 
+justify-content:flex-end; 
+gap:10px; 
+flex-wrap:wrap; 
+padding-top:14px; 
+margin-top:16px; 
+position:sticky; 
+bottom:0; 
+z-index:10; 
+background:rgba(255,255,255,.98); 
+border-top:1px solid rgba(148,163,184,.20); 
+} 
+@media (min-width: 769px){ 
+.modal-content{ 
+padding:24px 24px 32px 24px !important; 
+} 
+} 
+@media (max-width: 900px){ 
+.doc-hero{ 
+flex-direction:column; 
+align-items:flex-start; 
+} 
+.doc-header h1{ 
+font-size:30px; 
+} 
+} 
+@media (max-width: 768px){ 
+.records-desktop-wrap{ 
+display:none; 
+} 
+.records-mobile-list{ 
+display:flex; 
+} 
+.doc-hero{ 
+padding:16px; 
+border-radius:20px; 
+} 
+.doc-header h1{ 
+font-size:24px; 
+} 
+.hero-badge{ 
+font-size:12px; 
+padding:8px 12px; 
+} 
+.control-card{ 
+padding:14px; 
+border-radius:20px; 
+} 
+.action-bar{ 
+flex-direction:column; 
+align-items:stretch; 
+gap:12px; 
+} 
+.search-group, 
+.filter-group{ 
+width:100%; 
+display:flex; 
+flex-direction:column; 
+align-items:stretch; 
+gap:10px; 
+margin-left:0; 
+justify-content:flex-start; 
+} 
+.filter-select-wrap, 
+.search-input, 
+.btn{ 
+width:100%; 
+min-width:unset; 
+} 
+.btn{ 
+height:42px; 
+font-size:13px; 
+} 
+.form-grid, 
+.check-grid, 
+.routing-grid, 
+.details-grid{ 
+grid-template-columns:1fr; 
+} 
+.form-section{ 
+padding:14px; 
+margin-bottom:14px; 
+} 
+.form-section h3{ 
+font-size:16px; 
+margin-bottom:12px; 
+} 
+.form-group label{ 
+font-size:13px; 
+} 
+.form-control, 
+.routing-extra,
+.routing-time{ 
+height:42px; 
+font-size:13px; 
+} 
+textarea.form-control{ 
+min-height:90px; 
+padding:10px 12px; 
+} 
+.action-btn{ 
+width:32px; 
+height:32px; 
+border-radius:10px; 
+font-size:12px; 
+} 
+.current-status-cell{ 
+min-width:160px; 
+} 
+.program-badge{ 
+min-width:70px; 
+padding:6px 10px; 
+font-size:11px; 
+} 
+.filter-select-wrap{ 
+min-width:100%; 
+width:100%; 
+}
+}
+  .remarks-btn{
+  background:#dbeafe;
+  color:#000000;
+  border:1px solid #000000;
+  border-radius:6px;
+  padding:6px 12px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:500;
+
+  transition: all 0.2s ease;
+  }
+
+  .remarks-btn:hover{
+    background:#bae6fd;
+    color:#1e40af;           
+    border-color:#38bdf8;
+
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
+  }
+
+.remarks-table {
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 13px;
+  height: auto;
+}
+
+.remarks-table th,
+.remarks-table td {
+  border: 1px solid #d1d5db;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.remarks-table th {
+  background:rgba(255,255,255,.70); 
+  font-weight: 600;
+}
+
+.remarks-table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.view-image-link{
+    color:#000;
+    text-decoration:underline;
+    font-size:13px;
+    font-weight:500;
+    transition:color .2s ease;
+}
+
+.view-image-link:hover{
+    color:#2563eb;
+}
+
+.view-image-link:visited{
+    color:#000;
+}
+
+.view-image-link:active{
+    color:#1d4ed8;
+}
+
+.remark-thumb{
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:10px;
+    cursor:pointer;
+    margin-top:6px;
+    border:1px solid #d1d5db;
+    box-shadow:0 4px 12px rgba(15,23,42,.12);
+    background:#fff;
+    display:block;
+}
+
+.remark-thumb:hover{
+    transform:scale(1.03);
+    box-shadow:0 8px 18px rgba(15,23,42,.18);
+}
+
+.remark-view-thumb{
+    width:90px;
+    height:90px;
+    object-fit:cover;
+    border-radius:10px;
+    cursor:pointer;
+    border:1px solid #d1d5db;
+    box-shadow:0 4px 12px rgba(15,23,42,.12);
+    background:#fff;
+    display:block;
+    margin-top:6px;
+}
+
+.image-preview-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.78);
+    z-index:2147483647;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    cursor:zoom-out;
+}
+
+.image-preview-box{
+    position:relative;
+    max-width:94vw;
+    max-height:94vh;
+}
+
+.image-preview-box img{
+    max-width:94vw;
+    max-height:94vh;
+    border-radius:14px;
+    background:#fff;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+    display:block;
+}
+
+.image-preview-close{
+    position:absolute;
+    top:-14px;
+    right:-14px;
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:999px;
+    background:#fff;
+    color:#111827;
+    font-size:24px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+
+/* =========================================================
+   NAVY GLASS UI OVERRIDES
+   ========================================================= */
+
+:root{
+  --glass:rgba(255,255,255,.20);
+  --glass-strong:rgba(255,255,255,.28);
+  --glass-soft:rgba(255,255,255,.14);
+  --stroke:rgba(255,255,255,.46);
+
+  --navy-1:#081f42;
+  --navy-2:#123d73;
+  --navy-3:#1e5a9d;
+  --navy-glass-1:rgba(8,31,66,.92);
+  --navy-glass-2:rgba(18,61,115,.84);
+
+  --text:#172033;
+  --muted:#657084;
+
+  --shadow:
+    0 24px 55px rgba(15,23,42,.14),
+    inset 0 1px 0 rgba(255,255,255,.34);
+
+  --shadow-soft:
+    0 12px 28px rgba(15,23,42,.10),
+    inset 0 1px 0 rgba(255,255,255,.28);
+}
+
+.doc-shell{
+  position:relative;
+  isolation:isolate;
+  padding:2px;
+}
+
+.doc-shell::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(255,255,255,.48),transparent 28%),
+    radial-gradient(circle at 85% 18%,rgba(96,165,250,.20),transparent 32%),
+    radial-gradient(circle at 70% 90%,rgba(14,116,144,.14),transparent 35%);
+}
+
+/* Main hero glass card */
+.doc-hero{
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.42),rgba(255,255,255,.16));
+  backdrop-filter:blur(24px) saturate(145%);
+  -webkit-backdrop-filter:blur(24px) saturate(145%);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:
+    0 24px 55px rgba(15,23,42,.13),
+    inset 0 1px 0 rgba(255,255,255,.72);
+}
+
+.doc-hero::after{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:27px;
+  pointer-events:none;
+  background:
+    linear-gradient(120deg,rgba(255,255,255,.30),transparent 35%);
+  opacity:.7;
+}
+
+.doc-hero{
+  position:relative;
+  overflow:hidden;
+}
+
+.doc-header,
+.hero-badge{
+  position:relative;
+  z-index:1;
+}
+
+.doc-header h1{
+  color:#101a31;
+  text-shadow:0 1px 0 rgba(255,255,255,.60);
+}
+
+.hero-badge{
+  background:rgba(22,163,74,.13);
+  color:#166534;
+  border:1px solid rgba(255,255,255,.55);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    0 8px 20px rgba(22,101,52,.08);
+}
+
+/* Whole document/control section as glass */
+.control-card{
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.36),rgba(255,255,255,.14));
+  backdrop-filter:blur(26px) saturate(145%);
+  -webkit-backdrop-filter:blur(26px) saturate(145%);
+  border:1px solid rgba(255,255,255,.50);
+  box-shadow:
+    0 28px 65px rgba(15,23,42,.14),
+    inset 0 1px 0 rgba(255,255,255,.62);
+}
+
+.control-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(120deg,rgba(255,255,255,.24),transparent 28%),
+    radial-gradient(circle at 90% 8%,rgba(96,165,250,.09),transparent 30%);
+}
+
+.control-card > *{
+  position:relative;
+  z-index:1;
+}
+
+/* Glass controls */
+.form-control,
+.search-input,
+.search-select,
+.filter-select{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.48),rgba(255,255,255,.26));
+  border:1px solid rgba(255,255,255,.58);
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.68),
+    0 8px 18px rgba(15,23,42,.05);
+}
+
+.form-control:hover,
+.search-input:hover,
+.search-select:hover,
+.filter-select:hover{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.60),rgba(255,255,255,.32));
+}
+
+.form-control:focus,
+.search-input:focus,
+.search-select:focus,
+.filter-select:focus,
+textarea.form-control:focus{
+  border-color:rgba(59,130,246,.48);
+  box-shadow:
+    0 0 0 4px rgba(37,99,235,.10),
+    inset 0 1px 0 rgba(255,255,255,.72),
+    0 12px 28px rgba(37,99,235,.10);
+}
+
+.btn-outline{
+  background:rgba(255,255,255,.30);
+  color:#24344f;
+  border:1px solid rgba(255,255,255,.58);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.66),
+    0 8px 20px rgba(15,23,42,.06);
+}
+
+.btn-outline:hover{
+  background:rgba(255,255,255,.48);
+}
+
+/* Table glass shell */
+.table-wrap{
+  margin-top:20px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.25),rgba(255,255,255,.10));
+  backdrop-filter:blur(22px) saturate(135%);
+  -webkit-backdrop-filter:blur(22px) saturate(135%);
+  border:1px solid rgba(255,255,255,.50);
+  box-shadow:
+    0 22px 48px rgba(15,23,42,.10),
+    inset 0 1px 0 rgba(255,255,255,.55);
+}
+
+/* Navy glass table header */
+.records-table thead{
+  background:
+    linear-gradient(
+      135deg,
+      var(--navy-glass-1),
+      var(--navy-glass-2) 55%,
+      rgba(30,90,157,.76)
+    );
+  backdrop-filter:blur(20px) saturate(135%);
+  -webkit-backdrop-filter:blur(20px) saturate(135%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.20),
+    0 12px 26px rgba(8,31,66,.16);
+}
+
+.records-table thead th{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,0));
+  color:#f8fbff;
+  border-right:1px solid rgba(255,255,255,.07);
+  border-bottom:1px solid rgba(255,255,255,.20);
+  text-shadow:0 1px 2px rgba(0,0,0,.20);
+}
+
+.records-table thead th:first-child{
+  border-top-left-radius:15px;
+}
+
+.records-table thead th:last-child{
+  border-top-right-radius:15px;
+  border-right:none;
+}
+
+/* Glass rows */
+.records-table tbody tr{
+  background:rgba(255,255,255,.13);
+  transition:background .20s ease,box-shadow .20s ease,transform .20s ease;
+}
+
+.records-table tbody tr:nth-child(even){
+  background:rgba(255,255,255,.08);
+}
+
+.records-table tbody tr:hover{
+  background:rgba(255,255,255,.28);
+  box-shadow:inset 4px 0 0 rgba(37,99,235,.52);
+}
+
+.records-table td,
+.records-table td.action-column,
+.records-table tbody tr:nth-child(even) td,
+.records-table tbody tr:nth-child(even) td.action-column,
+.records-table tbody tr:hover td,
+.records-table tbody tr:hover td.action-column{
+  background:transparent !important;
+}
+
+.records-table td{
+  border-top:1px solid rgba(148,163,184,.14);
+}
+
+/* Approved row glass */
+.records-table tbody tr.approved-row{
+  background:
+    linear-gradient(90deg,rgba(16,185,129,.16),rgba(255,255,255,.08));
+  box-shadow:inset 4px 0 0 rgba(16,185,129,.72);
+}
+
+.records-table tbody tr.approved-row:hover{
+  background:
+    linear-gradient(90deg,rgba(16,185,129,.22),rgba(255,255,255,.15));
+}
+
+.records-table tbody tr.approved-row td,
+.records-table tbody tr.approved-row td.action-column{
+  background:transparent !important;
+}
+
+/* Glass action buttons */
+.action-btn{
+  border:1px solid rgba(255,255,255,.38);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.30),
+    0 8px 18px rgba(15,23,42,.11);
+}
+
+.view-btn{
+  background:linear-gradient(135deg,rgba(59,130,246,.92),rgba(37,99,235,.78));
+}
+
+.edit-btn{
+  background:linear-gradient(135deg,rgba(245,158,11,.94),rgba(217,119,6,.82));
+}
+
+.delete-btn{
+  background:linear-gradient(135deg,rgba(239,68,68,.94),rgba(220,38,38,.82));
+}
+
+.action-btn:hover{
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    0 12px 24px rgba(15,23,42,.16);
+}
+
+/* Program badges as glass pills */
+.program-badge{
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.58),
+    0 7px 16px rgba(15,23,42,.07);
+}
+
+/* Mobile cards */
+.record-mobile-card{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.37),rgba(255,255,255,.15));
+  border:1px solid rgba(255,255,255,.52);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:
+    0 16px 34px rgba(15,23,42,.10),
+    inset 0 1px 0 rgba(255,255,255,.62);
+}
+
+.record-mobile-card.approved-row{
+  background:
+    linear-gradient(145deg,rgba(16,185,129,.18),rgba(255,255,255,.14)) !important;
+}
+
+/* Glass modal */
+.modal{
+  background:rgba(8,31,66,.32);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+.modal-content{
+  background:
+    linear-gradient(145deg,rgba(246,250,255,.90),rgba(226,237,249,.78));
+  backdrop-filter:blur(28px) saturate(140%);
+  -webkit-backdrop-filter:blur(28px) saturate(140%);
+}
+
+.modal-header,
+.modal-footer{
+  background:rgba(245,250,255,.74);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+
+.form-section,
+.details-card,
+.history-item,
+.routing-item,
+.check-grid label{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.44),rgba(255,255,255,.22));
+  border:1px solid rgba(255,255,255,.56);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.58),
+    0 10px 24px rgba(15,23,42,.06);
+}
+
+.routing-extra,
+.routing-time{
+  background:rgba(255,255,255,.48);
+  border:1px solid rgba(255,255,255,.58);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.close-btn{
+  background:rgba(255,255,255,.40);
+  border:1px solid rgba(255,255,255,.62);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+/* Remarks/history table */
+.remarks-table{
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+.remarks-table th{
+  background:
+    linear-gradient(135deg,rgba(8,31,66,.92),rgba(18,61,115,.84));
+  color:#fff;
+  border-color:rgba(255,255,255,.16);
+}
+
+.remarks-table td{
+  background:rgba(255,255,255,.22);
+  border-color:rgba(148,163,184,.20);
+}
+
+.remarks-table tbody tr:nth-child(even){
+  background:rgba(255,255,255,.10);
+}
+
+.remark-thumb,
+.remark-view-thumb{
+  border:1px solid rgba(255,255,255,.58);
+  box-shadow:
+    0 10px 22px rgba(15,23,42,.14),
+    inset 0 1px 0 rgba(255,255,255,.40);
+}
+
+/* Pagination glass */
+.page-btn{
+  background:rgba(255,255,255,.30);
+  border:1px solid rgba(255,255,255,.58);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+.page-btn.active{
+  background:
+    linear-gradient(135deg,rgba(8,31,66,.94),rgba(18,61,115,.86));
+}
+
+/* Better contrast on smaller screens */
+@media(max-width:768px){
+  .doc-hero,
+  .control-card{
+    backdrop-filter:blur(20px) saturate(135%);
+    -webkit-backdrop-filter:blur(20px) saturate(135%);
+  }
+
+  .record-mobile-card{
+    background:
+      linear-gradient(145deg,rgba(255,255,255,.46),rgba(255,255,255,.22));
+  }
+}
+
+
+/* =========================================================
+   FINAL ACTION BUTTON OVERRIDE
+   One-line minimalist action icons
+   ========================================================= */
+
+.records-table th.action-column,
+.records-table td.action-column,
+.records-table th:first-child,
+.records-table td:first-child{
+  width:130px !important;
+  min-width:130px !important;
+  max-width:130px !important;
+  text-align:center !important;
+}
+
+.action-cell{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:6px !important;
+  flex-wrap:nowrap !important;
+  white-space:nowrap !important;
+  width:100% !important;
+}
+
+.action-btn{
+  width:32px !important;
+  min-width:32px !important;
+  height:32px !important;
+  flex:0 0 32px !important;
+  padding:0 !important;
+
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  border-radius:8px !important;
+  border:1px solid rgba(15,23,42,.08) !important;
+  cursor:pointer !important;
+
+  font-size:13px !important;
+  box-shadow:none !important;
+
+  backdrop-filter:blur(8px) !important;
+  -webkit-backdrop-filter:blur(8px) !important;
+
+  transition:
+    background .18s ease,
+    color .18s ease,
+    border-color .18s ease,
+    transform .18s ease,
+    box-shadow .18s ease !important;
+}
+
+.action-btn i{
+  font-size:13px !important;
+  line-height:1 !important;
+  pointer-events:none;
+}
+
+.view-btn{
+  background:rgba(37,99,235,.10) !important;
+  color:#2563eb !important;
+  border-color:rgba(37,99,235,.16) !important;
+}
+
+.edit-btn{
+  background:rgba(217,119,6,.10) !important;
+  color:#b45309 !important;
+  border-color:rgba(217,119,6,.16) !important;
+}
+
+.delete-btn{
+  background:rgba(220,38,38,.09) !important;
+  color:#dc2626 !important;
+  border-color:rgba(220,38,38,.15) !important;
+}
+
+.view-btn:hover{
+  background:#2563eb !important;
+  color:#fff !important;
+  border-color:#2563eb !important;
+}
+
+.edit-btn:hover{
+  background:#d97706 !important;
+  color:#fff !important;
+  border-color:#d97706 !important;
+}
+
+.delete-btn:hover{
+  background:#dc2626 !important;
+  color:#fff !important;
+  border-color:#dc2626 !important;
+}
+
+.action-btn:hover{
+  transform:translateY(-1px) !important;
+  box-shadow:0 6px 14px rgba(15,23,42,.12) !important;
+}
+
+.action-btn:active{
+  transform:translateY(0) !important;
+}
+
+.action-btn:disabled{
+  opacity:.45 !important;
+  cursor:not-allowed !important;
+  transform:none !important;
+  box-shadow:none !important;
+}
+
+.record-mobile-actions{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:6px !important;
+  flex-wrap:nowrap !important;
+  white-space:nowrap !important;
+}
+
+@media(max-width:768px){
+  .action-btn{
+    width:30px !important;
+    min-width:30px !important;
+    height:30px !important;
+    flex-basis:30px !important;
+    font-size:12px !important;
+  }
+
+  .action-btn i{
+    font-size:12px !important;
+  }
+}
+
+</style> 
+
+<div class="doc-shell"> 
+<div class="control-card"> 
+<div class="action-bar"> 
+<div> 
+<button class="btn btn-primary" id="dtNewEntryBtn" type="button">+ New Entry</button> 
+</div> 
+<div class="filter-group"> 
+<div class="filter-select-wrap"> 
+<select id="dtTypeFilter" class="filter-select"> 
+<option value="ALL">All Document Types</option> 
+<option value="Project Proposal">Project Proposal</option> 
+<option value="Financial Assistance">Financial Assistance</option> 
+<option value="Payroll and Personnel">Payroll and Personnel</option> 
+<option value="To Payment">To Payment</option> 
+<option value="Reimbursement">Reimbursement</option> 
+</select> 
+</div> 
+<div class="filter-select-wrap"> 
+<select id="dtProgramFilter" class="filter-select"> 
+<option value="ALL">All Program/Unit</option> 
+<option value="LYDO">LYDO</option> 
+<option value="CSO">CSO</option> 
+<option value="DISASTER">DISASTER</option> 
+<option value="CCDC">CCDC</option> 
+<option value="PCIC">PCIC</option> 
+<option value="ADMIN">ADMIN</option> 
+<option value="Feeding">Feeding</option> 
+<option value="Others">Others</option>
+</select> 
+</div> 
+</div> 
+<div class="search-group"> 
+<input type="text" id="dtSearchInput" class="search-input" placeholder="Search documents..."> 
+<button class="btn btn-outline" id="dtSearchBtn" type="button">Search</button> 
+<button class="btn btn-outline" id="dtClearBtn" type="button">Clear</button> 
+</div> 
+</div> 
+<div class="records-desktop-wrap"> 
+<div class="table-wrap"> 
+<table class="records-table"> 
+<thead> 
+<tr> 
+<th class="action-column">Action</th> 
+<th>Program/Unit</th> 
+<th>Document Type</th> 
+<th>Document Description</th> 
+<th>Amount</th> 
+<th>Assigned Liaison</th> 
+<th>Current Status</th> 
+<th>Remarks</th> 
+</tr> 
+</thead> 
+<tbody id="dtTableBody"></tbody> 
+</table> 
+</div> 
+</div> 
+<div id="dtMobileList" class="records-mobile-list"></div> 
+<div id="dtPagination" class="pagination"></div> 
+</div> 
+</div> 
+<div id="dtEntryModal" class="modal"> 
+<div class="modal-content"> 
+<div class="modal-header"> 
+<h2 id="dtModalTitle">New Document Entry</h2> 
+<span class="close-btn" id="dtCloseEntryX">&times;</span> 
+</div> 
+<input type="hidden" id="dtMode" value="new"> 
+<input type="hidden" id="dtRecordId"> 
+<div class="form-section"> 
+<h3>Document Information</h3> 
+<div class="form-grid"> 
+<div class="form-group"> 
+<label>Program/Unit <span class="required">*</span></label> 
+<select id="dtProgramUnit" class="form-control"> 
+<option value="">Select</option> 
+<option value="LYDO">LYDO</option> 
+<option value="CSO">CSO</option> 
+<option value="DISASTER">DISASTER</option> 
+<option value="CCDC">CCDC</option> 
+<option value="PCIC">PCIC</option> 
+<option value="ADMIN">ADMIN</option> 
+<option value="Feeding">Feeding</option> 
+<option value="Others">Others</option>
+</select> 
+<input type="text" id="dtProgramUnitOther" class="form-control" placeholder="Specify other Program/Unit" style="display:none;margin-top:10px;">
+</div> 
+<div class="form-group"> 
+<label>Document Type <span class="required">*</span></label> 
+<select id="dtDocumentType" class="form-control"> 
+<option value="">Select</option> 
+<option value="Project Proposal">Project Proposal</option> 
+<option value="Financial Assistance">Financial Assistance</option> 
+<option value="Payroll and Personnel">Payroll and Personnel</option> 
+<option value="To Payment">To Payment</option> 
+<option value="Reimbursement">Reimbursement</option> 
+
+<option value="__CUSTOM__">+ Add Custom Document Type</option>
+</select>
+<input type="text" id="dtDocumentTypeCustom" class="form-control" maxlength="120" placeholder="Type custom Document Type" style="display:none;margin-top:10px;"> 
+</div> 
+<div class="form-group"> 
+<label>Reference Number</label> 
+<input type="text" id="dtReferenceNumber" class="form-control" readonly> 
+</div> 
+<div class="form-group"> 
+<label>Document Description <span class="required">*</span></label> 
+<input type="text" id="dtDocumentDescription" class="form-control"> 
+</div> 
+<div class="form-group"> 
+<label>Amount</label> 
+<div class="amount-wrap"> 
+<span class="amount-prefix">₱</span> 
+<input type="number" id="dtAmount" class="form-control amount-input" step="0.01" min="0" placeholder="0.00"> 
+</div> 
+</div> 
+
+<div class="form-group"> 
+<label>Date Created <span class="required">*</span></label> 
+<input type="date" id="dtDateCreated" class="form-control"> 
+</div> 
+
+<div class="form-group"> 
+<label>Assigned Liaison</label> 
+<select id="dtAssignedLiaison" class="form-control"> 
+<option value="">Select</option> 
+<option value="Amalia P. Petrona">Amalia P. Petrona</option> 
+<option value="Anjoe C. Garcia">Anjoe C. Garcia</option> 
+<option value="Leo Isabelo Celeste">Leo Isabelo Celeste</option> 
+</select> 
+</div> 
+
+  <div class="form-group"> 
+  <label>Attachment Link</label> 
+  <input type="text" id="dtAttachmentLink" class="form-control"> 
+  </div> 
+
+  <div class="form-group" style="grid-column: 1 / -1;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+    <label style="margin:0;">Remarks</label>
+
+    <button
+      type="button"
+      id="dtAddRemarksBtn"
+      class="remarks-btn">Add Remarks
+    </button>
+  </div>
+
+<!--ADDED 5PM1-->
+  <div id="dtRemarksHistory"
+     class="history-list"
+     style="
+       display:none;
+       max-height:200px;
+       overflow-y:auto;
+       margin-bottom:10px;">
+  </div>
+
+  <textarea
+    id="dtRemarks"
+    class="form-control"
+    rows="3"
+    placeholder="Type new remarks here"></textarea>
+
+  <div style="margin-top:10px;">
+    <label style="display:block;margin-bottom:8px;">Remarks Image</label>
+    <input type="file" id="dtRemarkImage" class="form-control" accept="image/*">
+    <div id="dtRemarkImagePreview" style="display:none;margin-top:8px;font-size:13px;color:#334155;"></div>
+  </div>
+
+</div> 
+</div>
+
+<div class="form-section" id="dtChecklistSection"> 
+<h3>Checklist</h3>
+
+  <div class="check-grid"> 
+    <label><input type="checkbox" class="dtChecklist" value="PR"> (PR) Purchase Request</label> 
+    <label><input type="checkbox" class="dtChecklist" value="CAFOA"> (CAFOA) Certificate of Appropriations, Funds and Obligations of Allotment</label> 
+    <label><input type="checkbox" class="dtChecklist" value="DV"> (DV) Disbursement Voucher</label> 
+    <label><input type="checkbox" class="dtChecklist" value="CEPCPC"> (CEP & CPC) Certificate of Emergency Purchase & Certificate of Personal Canvass</label> 
+    <label><input type="checkbox" class="dtChecklist" value="SOE"> (SOE) Summary of Expenses</label> 
+    <label><input type="checkbox" class="dtChecklist" value="AIR"> (AIR) Acceptance and Inspection Report</label> 
+    <label><input type="checkbox" class="dtChecklist" value="PPMP"> (PPMP) Project Procurement Management Plan</label> 
+    <label><input type="checkbox" class="dtChecklist" value="MSC"> (MSC) Market Scoping Checklist</label> 
+    <label><input type="checkbox" class="dtChecklist" value="LP"> (LP) Letter Proposal</label> 
+    <label><input type="checkbox" class="dtChecklist" value="PP"> (PP) Project Proposal</label> 
+    <label><input type="checkbox" class="dtChecklist" value="FR"> (FR) Feedback Report</label> 
+    <label><input type="checkbox" class="dtChecklist" value="BAC"> (BAC) Bids and Awards Committee Resolution</label> 
+    <label><input type="checkbox" class="dtChecklist" value="LR"> (LR) Liquidation Report</label> 
+  </div>
+<div class="custom-checklist-box">
+  <label>Additional Checklist Item</label>
+  <div class="custom-checklist-input-row">
+    <input type="text" id="dtCustomChecklistInput" class="form-control" maxlength="160" placeholder="Type an additional checklist item">
+    <button type="button" class="btn btn-outline" id="dtAddCustomChecklistBtn">+ Add</button>
+  </div>
+  <div id="dtCustomChecklistList" class="custom-checklist-list"></div>
+</div>
+ 
+<h4>Other Attachments</h4> 
+<div class="check-grid"> 
+<label><input type="checkbox" class="dtChecklist" value="Attendance">Attendance</label> 
+<label><input type="checkbox" class="dtChecklist" value="Receipt/s">Receipt/s</label> 
+<label><input type="checkbox" class="dtChecklist" value="ID">Photocopy of Valid ID/s</label> 
+<label><input type="checkbox" class="dtChecklist" value="Photo Documentation">Photo Documentation</label> 
+<label><input type="checkbox" class="dtChecklist" value="DTR">DTR/s</label> 
+<label><input type="checkbox" class="dtChecklist" value="POFAPP">Program of Works & Appointment</label> 
+</div> 
+</div> 
+<div class="form-section"> 
+<h3>Routing</h3> 
+<div class="routing-grid"> 
+<div class="routing-item"> 
+<label class="routing-main"> 
+<input type="checkbox" class="dtRouting" value="Forwarded to Admin. Division"> 
+<span>Forwarded to Admin. Division</span> 
+</label> 
+<input type="text" class="routing-extra routing-combo" data-routing="Forwarded to Admin. Division" list="dt-routing-admin-options" placeholder="Select or type remark" disabled> 
+<datalist id="dt-routing-admin-options"> 
+<option value="Marilou DC. Tambiga"> 
+<option value="Mary Antonette M. Gil"> 
+<option value="Zaira Nikka B. Caburnay"> 
+<option value="Oliver C. Sison"> 
+<option value="Merry Joy C. Victorio"> 
+<option value="Emelina G. Fernandez"> 
+<option value="Jovelyn C. Nazarita"> 
+</datalist> 
+</div> 
+<div class="routing-item"> 
+<label class="routing-main"> 
+<input type="checkbox" class="dtRouting" value="Signed/Approved by Ms. Annabel Roque"> 
+<span>Signed/Approved by Ms. Annabel Roque</span> 
+</label> 
+</div> 
+<div class="routing-item"> 
+<label class="routing-main"> 
+<input type="checkbox" class="dtRouting" value="Received by Assigned Liaison"> 
+<span>Received by Assigned Liaison</span> 
+</label> 
+<input type="text" class="routing-extra routing-combo" data-routing="Received by Assigned Liaison" list="dt-routing-liaison-options" placeholder="Select or type liaison/remark" disabled> 
+<datalist id="dt-routing-liaison-options"> 
+<option value="Amalia P. Petrona"> 
+<option value="Anjoe C. Garcia"> 
+<option value="Leo Isabelo Celeste"> 
+</datalist> 
+</div> 
+<div class="routing-item"> 
+<label class="routing-main"> 
+<input type="checkbox" class="dtRouting" value="Forwarded to Budget"> 
+<span>Forwarded to Budget</span> 
+</label> 
+<input type="text" class="routing-extra routing-combo" data-routing="Forwarded to Budget" list="dt-routing-budget-options" placeholder="Select or type remark" disabled> 
+<datalist id="dt-routing-budget-options"> 
+<option value="Shery Camba"> 
+</datalist> 
+</div> 
+<div class="routing-item"> 
+<label class="routing-main"> 
+<input type="checkbox" class="dtRouting" value="Forwarded to Accounting"> 
+<span>Forwarded to Accounting</span> 
+</label> 
+<input type="text" class="routing-extra routing-combo" data-routing="Forwarded to Accounting" list="dt-routing-accounting-options" placeholder="Select or type remark" disabled> 
+<datalist id="dt-routing-accounting-options"> 
+<option value="For Review"> 
+<option value="Pending">
+<option value="Claimed Cheque"> 
+<option value="Approved"> 
+<option value="Returned"> 
+</datalist> 
+</div> 
+<div class="routing-item"> 
+<label class="routing-main"> 
+<input type="checkbox" class="dtRouting" value="Forwarded to PGO"> 
+<span>Forwarded to PGO</span> 
+</label> 
+<input type="text" class="routing-extra routing-combo" data-routing="Forwarded to PGO" list="dt-routing-pgo-options" placeholder="Select or type remark" disabled> 
+<datalist id="dt-routing-pgo-options"> 
+<option value="Cathreen Torio Serrano"> 
+<option value="Michelle Diaz"> 
+<option value="Catherine Rosado"> 
+<option value="Gedee Kaye Pariño"> 
+</datalist> 
+</div> 
+<div class="routing-item"> 
+<label class="routing-main"> 
+<input type="checkbox" class="dtRouting" value="Forwarded to HR"> 
+<span>Forwarded to HR</span> 
+</label> 
+<input type="text" class="routing-extra routing-combo" data-routing="Forwarded to HR" list="dt-routing-hr-options" placeholder="Select or type remark" disabled> 
+<datalist id="dt-routing-hr-options"> 
+<option value="Gisele Santos"> 
+<option value="Lourdes Samson"> 
+<option value="Vincent Oliver"> 
+<option value="Arnold"> 
+</datalist> 
+</div> 
+<div class="routing-item"> 
+<label class="routing-main"> 
+<input type="checkbox" class="dtRouting" value="Others"> 
+<span>Others</span> 
+</label> 
+<input type="text" class="routing-extra routing-combo" data-routing="Others" placeholder="Specify other routing" disabled> 
+</div>
+
+<div class="routing-item">
+<label class="routing-main">
+<input type="checkbox" class="dtRouting" value="Claimed Cheque">
+<span>Claimed Cheque</span>
+</label>
+</div>
+<div class="routing-item"> 
+<label class="routing-main"> 
+<input type="checkbox" class="dtRouting" value="Completed/Approved"> 
+<span>Completed/Approved</span> 
+</label> 
+</div> 
+</div> 
+</div> 
+<div class="modal-footer"> 
+<button class="btn btn-outline" id="dtCancelEntryBtn" type="button">Cancel</button> 
+<button class="btn btn-primary" id="dtSaveBtn" type="button">Save</button> 
+</div> 
+</div> 
+</div> 
+<div id="dtDetailsModal" class="modal"> 
+  <div class="modal-content"> 
+  <div class="modal-header"> 
+  <h2>Document Details</h2> 
+  <span class="close-btn" id="dtCloseDetailsX">&times;</span> 
+  </div> 
+  <div id="dtDetailsContent"></div> 
+  </div> 
+</div> 
+<script>
+  
+let dtAllRecords = []; 
+let dtFilteredRecords = []; 
+let dtCurrentPage = 1; 
+const dtPageSize = 10; 
+let dtCurrentTypeFilter = 'ALL'; 
+let dtCurrentProgramFilter = 'ALL'; 
+let dtInitialized = false; 
+let dtRoutingOrder = [];
+let dtRemarkImageBase64 = '';
+let dtRemarkImageName = '';
+const dtKnownPrograms = ['LYDO','CSO','DISASTER','CCDC','PCIC','ADMIN'];
+
+    function dtEscapeHtml(value) { 
+      return String(value ?? '') 
+      .replace(/&/g, '&amp;') 
+      .replace(/</g, '&lt;') 
+      .replace(/>/g, '&gt;') 
+      .replace(/"/g, '&quot;') 
+      .replace(/'/g, '&#039;'); 
+    }
+
+    function dtGetProgramClass(programUnit) { 
+      const value = String(programUnit || '').trim().toLowerCase(); 
+      const classMap = { 
+      lydo: 'lydo', 
+      cso: 'cso', 
+      disaster: 'disaster', 
+      ccdc: 'ccdc', 
+      pcic: 'pcic', 
+      admin: 'admin' 
+      }; 
+      return classMap[value] || 'default'; 
+    }
+
+    function dtGetProgramCardClass(programUnit) { 
+      return 'program-' + dtGetProgramClass(programUnit); 
+    }
+
+    function dtGetProgramBadge(programUnit) { 
+      const value = String(programUnit || '').trim(); 
+      const badgeClass = dtGetProgramClass(value); 
+      return `<span class="program-badge ${badgeClass}">${dtEscapeHtml(value || 'N/A')}</span>`; 
+    }
+
+    function dtToggleProgramOther() {
+      const select = document.getElementById('dtProgramUnit');
+      const other = document.getElementById('dtProgramUnitOther');
+      if (!select || !other) return;
+      const show = select.value === 'Others';
+      other.style.display = show ? '' : 'none';
+      if (!show) other.value = '';
+    }
+
+    function dtResolvedProgramUnit() {
+      const selectValue = document.getElementById('dtProgramUnit').value;
+      const otherValue = document.getElementById('dtProgramUnitOther')?.value.trim() || '';
+      return selectValue === 'Others' ? (otherValue || 'Others') : selectValue;
+    }
+
+    function dtSetProgramUnitValue(value) {
+      const select = document.getElementById('dtProgramUnit');
+      const other = document.getElementById('dtProgramUnitOther');
+      const clean = String(value || '').trim();
+      if (!select || !other) return;
+      if (dtKnownPrograms.includes(clean) || clean === '') {
+        select.value = clean;
+        other.value = '';
+      } else {
+        select.value = 'Others';
+        other.value = clean === 'Others' ? '' : clean;
+      }
+      dtToggleProgramOther();
+    }
+
+    function dtResetRemarkImage() {
+      dtRemarkImageBase64 = '';
+      dtRemarkImageName = '';
+      const input = document.getElementById('dtRemarkImage');
+      const preview = document.getElementById('dtRemarkImagePreview');
+      if (input) input.value = '';
+      if (preview) {
+        preview.style.display = 'none';
+        preview.innerHTML = '';
+      }
+    }
+
+    function dtHandleRemarkImageChange(e) {
+      const file = e.target.files && e.target.files[0];
+      const preview = document.getElementById('dtRemarkImagePreview');
+      dtRemarkImageBase64 = '';
+      dtRemarkImageName = '';
+      if (!file) {
+        if (preview) {
+          preview.style.display = 'none';
+          preview.innerHTML = '';
+        }
+        return;
+      }
+      if (!file.type.startsWith('image/')) {
+        alert('Please upload an image file only.');
+        e.target.value = '';
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image is too large. Please upload 5MB or smaller.');
+        e.target.value = '';
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        dtRemarkImageBase64 = evt.target.result || '';
+        dtRemarkImageName = file.name || 'remark-image';
+        if (preview) {
+          preview.style.display = 'block';
+          preview.innerHTML = `Selected image: <strong>${dtEscapeHtml(dtRemarkImageName)}</strong>`;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function dtFormatPeso(value) { 
+      const num = Number(value); 
+      if (value === '' || value === null || value === undefined || isNaN(num)) return '—'; 
+      return `₱${num.toLocaleString('en-PH', { 
+      minimumFractionDigits: 2, 
+      maximumFractionDigits: 2 
+      })}`; 
+    }
+
+//ADDED
+function dtGetDriveFileId(url) {
+  const text = String(url || '');
+  let match = text.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (match && match[1]) return match[1];
+
+  match = text.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (match && match[1]) return match[1];
+
+  match = text.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (match && match[1]) return match[1];
+
+  return '';
+}
+
+function dtGetImageSrc(url) {
+  const raw = String(url || '').trim();
+  if (!raw) return '';
+
+  const fileId = dtGetDriveFileId(raw);
+  if (fileId) {
+    return `https://drive.google.com/thumbnail?id=${encodeURIComponent(fileId)}&sz=w1000`;
+  }
+
+  return raw;
+}
+
+function dtOpenImagePreview(url) {
+  const rawUrl = String(url || '').trim();
+  if (!rawUrl) return;
+
+  const imageSrc = dtGetImageSrc(rawUrl);
+  const overlay = document.createElement('div');
+  overlay.className = 'image-preview-overlay';
+
+  overlay.innerHTML = `
+    <div class="image-preview-box">
+      <button type="button" class="image-preview-close" aria-label="Close image preview">&times;</button>
+      <img src="${dtEscapeHtml(imageSrc)}" alt="Remarks image preview">
+    </div>
+  `;
+
+  overlay.addEventListener('click', function(e) {
+    if (
+      e.target === overlay ||
+      e.target.classList.contains('image-preview-close')
+    ) {
+      overlay.remove();
+    }
+  });
+
+  document.body.appendChild(overlay);
+}
+
+function dtFormatRemarksDisplay(remarks) {
+  if (!remarks) return '—';
+
+  try {
+    const arr = JSON.parse(remarks);
+    if (!Array.isArray(arr) || !arr.length) return '—';
+
+    const latest = arr[arr.length - 1];
+    const dateOnly = String(latest.timestamp || '').split(' ')[0];
+    const imageUrl = String(latest.imageUrl || '').trim();
+    const imageSrc = dtGetImageSrc(imageUrl);
+
+    return `
+      <span style="font-size:11px;">Date: ${dtEscapeHtml(dateOnly)}</span><br>
+      <span style="font-size:12px;"><strong>${dtEscapeHtml(latest.remark || '')}</strong></span>
+      ${
+        imageUrl
+          ? `<br>
+              <img
+                src="${dtEscapeHtml(imageSrc)}"
+                class="remark-thumb"
+                alt="Remarks image"
+                loading="lazy"
+                onclick="dtOpenImagePreview('${dtEscapeHtml(imageUrl)}')"
+              >`
+          : ''
+      }
+    `;
+  } catch (e) {
+    return dtEscapeHtml(remarks);
+  }
+}
+
+//ADDED
+    function dtFormatRemarksForView(remarks) {
+      if (!remarks) return '—';
+
+      try {
+        const arr = JSON.parse(remarks);
+
+        if (!Array.isArray(arr) || !arr.length) {
+          return '—';
+        }
+
+        return `
+          <table class="remarks-table">
+            <thead>
+              <tr>
+                <th>Creation Date</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${arr.map(r => {
+                let timestamp = String(r.timestamp || '');
+
+                if (timestamp) {
+                  const parts = timestamp.split(' ');
+                  if (parts.length >= 3) {
+                    timestamp = `${parts[0]}, ${parts[1]} ${parts[2]}`;
+                  }
+                }
+
+                return `
+                  <tr>
+                    <td>${dtEscapeHtml(timestamp)}</td>
+                    <td>
+                      ${dtEscapeHtml(r.remark || '')}
+                      ${r.imageUrl ? `
+                        <br>
+                        <img
+                          src="${dtEscapeHtml(dtGetImageSrc(r.imageUrl))}"
+                          class="remark-view-thumb"
+                          alt="Remarks image"
+                          loading="lazy"
+                          onclick="dtOpenImagePreview('${dtEscapeHtml(r.imageUrl)}')"
+                        >
+                      ` : ''}
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        `;
+      } catch (e) {
+        return dtEscapeHtml(remarks);
+      }
+    } 
+
+
+    function dtGetTodayManila() { 
+      const now = new Date(); 
+      const parts = new Intl.DateTimeFormat('en-CA', { 
+      timeZone: 'Asia/Manila', 
+      year: 'numeric', 
+      month: '2-digit', 
+      day: '2-digit' 
+      }).formatToParts(now); 
+      const year = parts.find(p => p.type === 'year').value; 
+      const month = parts.find(p => p.type === 'month').value; 
+      const day = parts.find(p => p.type === 'day').value; 
+      return `${year}-${month}-${day}`; 
+    }
+
+    function dtGetNowManilaDateTimeLocal() {
+      const now = new Date();
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Manila',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hourCycle: 'h23'
+      }).formatToParts(now);
+
+      const get = type => parts.find(p => p.type === type)?.value || '';
+      return `${get('year')}-${get('month')}-${get('day')}T${get('hour')}:${get('minute')}`;
+    }
+
+    function dtCreateRoutingTimeFields() {
+      document.querySelectorAll('.routing-item').forEach(item => {
+        const checkbox = item.querySelector('.dtRouting');
+        if (!checkbox || item.querySelector('.routing-time')) return;
+
+        const timeInput = document.createElement('input');
+        timeInput.type = 'datetime-local';
+        timeInput.className = 'routing-extra routing-time';
+        timeInput.dataset.routing = checkbox.value;
+        timeInput.disabled = true;
+        timeInput.setAttribute('aria-label', `${checkbox.value} date and time`);
+        item.appendChild(timeInput);
+      });
+    }
+
+    function dtNormalizeArray(value) { 
+      if (Array.isArray(value)) return value; 
+      if (!value) return []; 
+      if (typeof value === 'string') { 
+      return value.split(',').map(v => v.trim()).filter(Boolean); 
+      } 
+      return []; 
+    }
+
+    function dtNormalizeRoutingDetails(routing) { 
+      if (!Array.isArray(routing)) return []; 
+      return routing.map(item => { 
+      if (typeof item === 'string') { 
+      return { checkpoint: item.trim(), timestamp: '', extra: '' }; 
+      } 
+      if (item && typeof item === 'object') { 
+      return { 
+      checkpoint: String(item.checkpoint || '').trim(), 
+      timestamp: String(item.timestamp || '').trim(), 
+      extra: String(item.extra || '').trim() 
+      }; 
+      } 
+      return null; 
+      }).filter(Boolean); 
+    }
+
+    function dtGetLatestRoutingItem(routing) { 
+      if (!Array.isArray(routing) || !routing.length) return null; 
+      const normalized = routing 
+      .map(item => { 
+      if (typeof item === 'string') { 
+      return { checkpoint: item, timestamp: '', extra: '' }; 
+      } 
+      if (item && typeof item === 'object') { 
+      return { 
+      checkpoint: item.checkpoint || '', 
+      timestamp: item.timestamp || '', 
+      extra: item.extra || '' 
+      }; 
+      } 
+      return null; 
+      }) 
+      .filter(item => item && item.checkpoint); 
+      if (!normalized.length) return null; 
+      const withTimestamp = normalized.filter(item => item.timestamp); 
+      if (withTimestamp.length) { 
+      withTimestamp.sort((a, b) => String(a.timestamp).localeCompare(String(b.timestamp))); 
+      return withTimestamp[withTimestamp.length - 1]; 
+      } 
+      return normalized[normalized.length - 1]; 
+    }
+
+    function dtGetCurrentStatusDisplay(record) { 
+      const latestRouting = dtGetLatestRoutingItem(record.routingDetails || record.routing); 
+      if (!latestRouting) { 
+      return { 
+      checkpoint: record.currentStatus || '', 
+      extra: '', 
+      timestamp: '' 
+      }; 
+      } 
+      return { 
+      checkpoint: latestRouting.checkpoint || record.currentStatus || '', 
+      extra: latestRouting.extra || '', 
+      timestamp: latestRouting.timestamp || '' 
+      }; 
+    }
+
+    function dtFindRecordById(id) { 
+      return dtAllRecords.find(r => String(r.id) === String(id)); 
+    }
+
+    function dtSetRoutingExtraState(routingValue, isChecked, clearValue) { 
+      const comboField = document.querySelector(`.routing-combo[data-routing="${routingValue}"]`);
+      const timeField = document.querySelector(`.routing-time[data-routing="${routingValue}"]`);
+
+      if (comboField) {
+        comboField.disabled = !isChecked;
+        if (!isChecked && clearValue) comboField.value = '';
+      }
+
+      if (timeField) {
+        timeField.disabled = !isChecked;
+        if (isChecked && !timeField.value) {
+          timeField.value = dtGetNowManilaDateTimeLocal();
+        } else if (!isChecked && clearValue) {
+          timeField.value = '';
+        }
+      }
+    }
+
+    function dtShowChecklistSection() { 
+      const section = document.getElementById('dtChecklistSection'); 
+      if (section) section.style.display = ''; 
+    }
+
+    function dtHideChecklistSection() { 
+      const section = document.getElementById('dtChecklistSection'); 
+      if (section) section.style.display = 'none'; 
+    }
+
+    function dtMountModalsToBody() { 
+      ['dtEntryModal', 'dtDetailsModal'].forEach(id => { 
+      const modal = document.getElementById(id); 
+      if (modal && modal.parentNode !== document.body) { 
+      document.body.appendChild(modal); 
+      } 
+      }); 
+    }
+
+    function dtLockBodyScroll() { 
+    document.documentElement.classList.add('panel-open'); 
+    document.body.classList.add('panel-open'); 
+    } 
+
+    function dtUnlockBodyScroll() { 
+    document.documentElement.classList.remove('panel-open'); 
+    document.body.classList.remove('panel-open'); 
+    } 
+
+    function dtOpenModal(modalId) { 
+      const modal = document.getElementById(modalId); 
+      if (!modal) return; 
+      modal.classList.add('modal-active'); 
+      dtLockBodyScroll(); 
+      requestAnimationFrame(() => { 
+      modal.scrollTop = 0; 
+      const content = modal.querySelector('.modal-content'); 
+      if (content) content.scrollTop = 0; 
+      }); 
+    } 
+    
+    function dtCloseModal(modalId) { 
+      const modal = document.getElementById(modalId); 
+      if (!modal) return; 
+      modal.classList.remove('modal-active'); 
+      dtUnlockBodyScroll(); 
+    } 
+
+    function dtHandleRecordActionClick(e) { 
+      const btn = e.target.closest('button[data-action]'); 
+      if (!btn) return; 
+      const action = btn.dataset.action; 
+      const id = btn.dataset.id; 
+      if (!id) { 
+      alert('This row has no valid record ID.'); 
+      return; 
+      } 
+      if (action === 'view') dtView(id); 
+      else if (action === 'edit') dtEdit(id); 
+      else if (action === 'delete') dtDelete(id); 
+    }
+
+    function dtInitPage() { 
+      if (dtInitialized) return; 
+      dtInitialized = true; 
+      dtMountModalsToBody();
+      dtCreateRoutingTimeFields(); 
+      const dateField = document.getElementById('dtDateCreated'); 
+      if (dateField) dateField.value = dtGetTodayManila(); 
+      document.getElementById('dtNewEntryBtn').addEventListener('click', dtOpenNewModal); 
+      document.getElementById('dtSearchBtn').addEventListener('click', dtSearch); 
+      document.getElementById('dtClearBtn').addEventListener('click', dtClearSearch); 
+      document.getElementById('dtCancelEntryBtn').addEventListener('click', dtCloseEntryModal); 
+      document.getElementById('dtCloseEntryX').addEventListener('click', dtCloseEntryModal); 
+      document.getElementById('dtCloseDetailsX').addEventListener('click', dtCloseDetailsModal); 
+      document.getElementById('dtSaveBtn').addEventListener('click', dtSave); 
+      document.getElementById('dtProgramUnit').addEventListener('change', function(){ dtToggleProgramOther(); dtGenerateReference(); });
+      document.getElementById('dtProgramUnitOther').addEventListener('input', dtGenerateReference);
+      document.getElementById('dtRemarkImage').addEventListener('change', dtHandleRemarkImageChange); 
+      document.getElementById('dtDocumentType').addEventListener('change', dtGenerateReference); 
+      document.getElementById('dtDateCreated').addEventListener('change', dtGenerateReference); 
+      document.getElementById('dtTypeFilter').addEventListener('change', function() { 
+        dtCurrentTypeFilter = this.value; 
+        dtApplyFilters(); 
+        }); 
+      document.getElementById('dtProgramFilter').addEventListener('change', function() { 
+        dtCurrentProgramFilter = this.value; 
+        dtApplyFilters(); 
+        }); 
+      document.getElementById('dtSearchInput').addEventListener('input', dtApplyFilters); 
+      document.querySelectorAll('.dtRouting').forEach(cb => { 
+        cb.addEventListener('change', function() { 
+        const value = this.value; 
+        if (this.checked) { 
+        dtRoutingOrder = dtRoutingOrder.filter(v => v !== value); 
+        dtRoutingOrder.push(value); 
+        dtSetRoutingExtraState(value, true, false); 
+        } else { 
+        dtRoutingOrder = dtRoutingOrder.filter(v => v !== value); 
+        dtSetRoutingExtraState(value, false, true); 
+        } 
+        }); 
+      }); 
+      document.getElementById('dtTableBody').addEventListener('click', dtHandleRecordActionClick); 
+      document.getElementById('dtMobileList').addEventListener('click', dtHandleRecordActionClick); 
+      document.getElementById('dtEntryModal').addEventListener('click', function(e) { 
+        if (e.target === this) dtCloseEntryModal(); 
+        }); 
+      document.getElementById('dtDetailsModal').addEventListener('click', function(e) { 
+        if (e.target === this) dtCloseDetailsModal(); 
+        });
+
+        /*//ADDED
+        document.getElementById('dtAddRemarksBtn')
+          .addEventListener('click', function () {
+
+            const remarks = document.getElementById('dtRemarks');
+
+            remarks.disabled = false;
+
+            if (remarks.value.trim() !== '') {
+              remarks.value += '\n--------------------------------\n';
+            }
+
+            remarks.focus();
+
+          }); */
+
+      //ADDED 5PM
+      document.getElementById('dtAddRemarksBtn')
+        .addEventListener('click', function () {
+
+          const remarks = document.getElementById('dtRemarks');
+
+          remarks.disabled = false;
+          remarks.value = '';      // always blank
+
+          remarks.focus();
+
+      });
+
+
+      dtLoad(); 
+    } 
+  
+  
+    document.getElementById('dtDocumentType')?.addEventListener('change', function() {
+      dtToggleCustomDocumentType();
+      dtGenerateReference();
+    });
+    document.getElementById('dtAddCustomChecklistBtn')?.addEventListener('click', dtAddCustomChecklistFromInput);
+    document.getElementById('dtCustomChecklistInput')?.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        dtAddCustomChecklistFromInput();
+      }
+    });
+
+document.addEventListener('DOMContentLoaded', dtInitPage); 
+    
+    function dtLoad() { 
+      google.script.run 
+      .withSuccessHandler(function(records) { 
+      dtAllRecords = Array.isArray(records) ? records : []; 
+      dtCurrentPage = 1; 
+      dtApplyFilters(); 
+      }) 
+      .withFailureHandler(function(err) { 
+      alert(err && err.message ? err.message : 'Failed to load records.'); 
+      }) 
+      .dtGetDocuments(); 
+    }
+
+    function dtApplyFilters() { 
+      const query = document.getElementById('dtSearchInput').value.toLowerCase().trim(); 
+      let temp = [...dtAllRecords]; 
+      if (dtCurrentTypeFilter !== 'ALL') { 
+      temp = temp.filter(r => (r.documentType || '') === dtCurrentTypeFilter); 
+      } 
+      if (dtCurrentProgramFilter !== 'ALL') { 
+      temp = temp.filter(r => (r.programUnit || '') === dtCurrentProgramFilter); 
+      } 
+      if (query) { 
+      temp = temp.filter(r => 
+      (r.referenceNumber || '').toLowerCase().includes(query) || 
+      (r.programUnit || '').toLowerCase().includes(query) || 
+      (r.documentType || '').toLowerCase().includes(query) || 
+      (r.documentDescription || '').toLowerCase().includes(query) || 
+      (r.assignedLiaison || '').toLowerCase().includes(query) || 
+      (r.currentStatus || '').toLowerCase().includes(query) || 
+      String(r.amount || '').toLowerCase().includes(query) || 
+      String(r.approvalState || '').toLowerCase().includes(query) || 
+      String(r.remarks || '').toLowerCase().includes(query) 
+      ); 
+      } 
+      dtFilteredRecords = temp; 
+      dtCurrentPage = 1; 
+      dtRenderTable(); 
+    } 
+
+    function dtRenderTable() { 
+      const tbody = document.getElementById('dtTableBody'); 
+      const mobileList = document.getElementById('dtMobileList'); 
+      tbody.innerHTML = ''; 
+      mobileList.innerHTML = ''; 
+      const start = (dtCurrentPage - 1) * dtPageSize; 
+      const end = start + dtPageSize; 
+      const pageRecords = dtFilteredRecords.slice(start, end); 
+      
+      if (!pageRecords.length) { 
+      tbody.innerHTML = ` 
+      <tr> 
+      <td colspan="8" class="empty-state">No records found.</td> 
+      </tr> 
+      `; 
+      mobileList.innerHTML = `<div class="empty-state">No records found.</div>`; 
+      dtRenderPagination(); 
+      return; 
+      } 
+
+      pageRecords.forEach(record => { 
+      const latestRouting = dtGetLatestRoutingItem(record.routingDetails || record.routing); 
+      const latestCheckpoint = String(latestRouting?.checkpoint || '').trim().toLowerCase(); 
+      const isCompletedApproved = 
+      record.approvalState === 'Approved' || 
+      latestCheckpoint === 'completed/approved'; 
+      const statusDisplay = dtGetCurrentStatusDisplay(record); 
+      const programCardClass = dtGetProgramCardClass(record.programUnit); 
+      const tr = document.createElement('tr'); 
+      tr.className = isCompletedApproved ? 'approved-row' : ''; 
+      tr.innerHTML = ` 
+      <td class="action-column"> 
+      <div class="action-cell">
+      <button class="action-btn view-btn" data-action="view" data-id="${dtEscapeHtml(record.id || '')}" type="button" ${!record.id ? 'disabled' : ''} title="View"><i class="fas fa-eye"></i></button> 
+      <button class="action-btn edit-btn" data-action="edit" data-id="${dtEscapeHtml(record.id || '')}" type="button" ${!record.id ? 'disabled' : ''} title="Edit"><i class="fas fa-pen"></i></button> 
+      <button class="action-btn delete-btn" data-action="delete" data-id="${dtEscapeHtml(record.id || '')}" type="button" ${!record.id ? 'disabled' : ''} title="Delete"><i class="fas fa-trash"></i></button> 
+      </div>
+      </td> 
+      <td class="program-cell">${dtGetProgramBadge(record.programUnit)}</td> 
+      <td>${dtEscapeHtml(record.documentType || '')}</td> 
+      <td>${dtEscapeHtml(record.documentDescription || '')}</td> 
+      <td>${dtFormatPeso(record.amount)}</td> 
+      <td>${dtEscapeHtml(record.assignedLiaison || '') || '—'}</td> 
+      <td class="current-status-cell"> 
+      <div class="history-item-title">${dtEscapeHtml(statusDisplay.checkpoint || '') || '—'}</div> 
+      <div class="history-item-meta">${dtEscapeHtml(statusDisplay.extra || '')}</div> 
+      <div class="history-item-meta">${dtEscapeHtml(statusDisplay.timestamp || '')}</div> 
+      </td> 
+      <td>${dtFormatRemarksDisplay(record.remarks)}</td>
+      `; 
+      tbody.appendChild(tr); 
+      const card = document.createElement('div'); 
+      card.className = `record-mobile-card ${programCardClass}${isCompletedApproved ? ' approved-row' : ''}`; 
+      card.innerHTML = ` 
+      <div class="record-mobile-top"> 
+      <div> 
+      <div class="record-mobile-title">${dtEscapeHtml(record.documentDescription || 'Untitled Document')}</div> 
+      <div style="margin-top:8px;">${dtGetProgramBadge(record.programUnit)}</div> 
+      </div> 
+      <div class="record-mobile-actions"> 
+      <button class="action-btn view-btn" data-action="view" data-id="${dtEscapeHtml(record.id || '')}" type="button" ${!record.id ? 'disabled' : ''} title="View"><i class="fas fa-eye"></i></button> 
+      <button class="action-btn edit-btn" data-action="edit" data-id="${dtEscapeHtml(record.id || '')}" type="button" ${!record.id ? 'disabled' : ''} title="Edit"><i class="fas fa-pen"></i></button> 
+      <button class="action-btn delete-btn" data-action="delete" data-id="${dtEscapeHtml(record.id || '')}" type="button" ${!record.id ? 'disabled' : ''} title="Delete"><i class="fas fa-trash"></i></button> 
+      </div> 
+      </div> 
+      <div class="record-mobile-grid"> 
+      <div class="record-mobile-row"> 
+      <span class="record-mobile-label">Document Type</span> 
+      <span class="record-mobile-value">${dtEscapeHtml(record.documentType || '') || '—'}</span> 
+      </div> 
+      <div class="record-mobile-row"> 
+      <span class="record-mobile-label">Amount</span> 
+      <span class="record-mobile-value">${dtFormatPeso(record.amount)}</span> 
+      </div> 
+      <div class="record-mobile-row"> 
+      <span class="record-mobile-label">Assigned Liaison</span> 
+      <span class="record-mobile-value">${dtEscapeHtml(record.assignedLiaison || '') || '—'}</span> 
+      </div> 
+      <div class="record-mobile-row"> 
+      <span class="record-mobile-label">Remarks</span> 
+      <span class="record-mobile-value">${dtFormatRemarksDisplay(record.remarks)}</span>
+      </div> 
+      </div> 
+      <div class="record-mobile-status"> 
+      <div class="record-mobile-row"> 
+      <span class="record-mobile-label">Current Status</span> 
+      <span class="record-mobile-value"> 
+      <strong>${dtEscapeHtml(statusDisplay.checkpoint || '') || '—'}</strong><br> 
+      ${dtEscapeHtml(statusDisplay.extra || '')}<br> 
+      ${dtEscapeHtml(statusDisplay.timestamp || '')} 
+      </span> 
+      </div> 
+      </div> 
+      `; 
+      mobileList.appendChild(card); 
+      }); 
+      dtRenderPagination(); 
+    }
+
+// For Pagination 
+    function dtRenderPagination() { 
+    const div = document.getElementById('dtPagination'); 
+    if (!div) return; 
+    div.innerHTML = ''; 
+    const totalPages = Math.ceil(dtFilteredRecords.length / dtPageSize); 
+    if (totalPages <= 1) return; 
+    for (let i = 1; i <= totalPages; i++) { 
+    const btn = document.createElement('button'); 
+    btn.className = 'page-btn' + (i === dtCurrentPage ? ' active' : ''); 
+    btn.textContent = i; 
+    btn.type = 'button'; 
+    btn.addEventListener('click', function() { 
+    dtCurrentPage = i; 
+    dtRenderTable(); 
+    }); 
+    div.appendChild(btn); 
+    } 
+    }
+
+    function dtSearch() { 
+      dtApplyFilters(); 
+    }
+
+    function dtClearSearch() { 
+      document.getElementById('dtSearchInput').value = ''; 
+      document.getElementById('dtTypeFilter').value = 'ALL'; 
+      document.getElementById('dtProgramFilter').value = 'ALL'; 
+      dtCurrentTypeFilter = 'ALL'; 
+      dtCurrentProgramFilter = 'ALL'; 
+      dtApplyFilters(); 
+    }
+
+    function dtResetFormState() { 
+      document.getElementById('dtModalTitle').textContent = 'New Document Entry'; 
+      document.getElementById('dtMode').value = 'new'; 
+      document.getElementById('dtRecordId').value = ''; 
+      document.getElementById('dtProgramUnit').value = '';
+      document.getElementById('dtProgramUnitOther').value = '';
+      dtToggleProgramOther(); 
+      document.getElementById('dtDocumentType').value = ''; 
+      document.getElementById('dtReferenceNumber').value = ''; 
+      document.getElementById('dtDocumentDescription').value = ''; 
+      document.getElementById('dtAmount').value = ''; 
+      document.getElementById('dtDateCreated').value = dtGetTodayManila(); 
+      document.getElementById('dtAssignedLiaison').value = '';
+      document.getElementById('dtDocumentTypeCustom').value = '';
+      dtToggleCustomDocumentType();
+      dtResetCustomChecklist();
+      //ADDED 5PM
+        document.getElementById('dtRemarksHistory').style.display = 'none';
+        document.getElementById('dtRemarksHistory').innerHTML = '';
+
+      document.getElementById('dtRemarks').value = '';
+      document.getElementById('dtRemarks').disabled = false;
+      document.getElementById('dtAttachmentLink').value = ''; 
+      dtResetRemarkImage();
+      dtShowChecklistSection(); 
+      document.querySelectorAll('#dtEntryModal input, #dtEntryModal select, #dtEntryModal textarea').forEach(el => { 
+      el.disabled = false; 
+      }); 
+      document.querySelectorAll('.dtChecklist').forEach(cb => { 
+      cb.checked = false; 
+      cb.disabled = false; 
+      }); 
+      document.querySelectorAll('.dtRouting').forEach(cb => { 
+      cb.checked = false; 
+      cb.disabled = false; 
+      }); 
+      document.querySelectorAll('.routing-combo').forEach(el => { 
+      el.value = ''; 
+      el.disabled = true; 
+      });
+      document.querySelectorAll('.routing-time').forEach(el => {
+      el.value = '';
+      el.disabled = true;
+      }); 
+      dtRoutingOrder = []; 
+    } 
+
+    function dtOpenNewModal() { 
+    dtResetFormState(); 
+    dtShowChecklistSection(); 
+    dtOpenModal('dtEntryModal'); 
+    } 
+
+    function dtCloseEntryModal() { 
+    dtCloseModal('dtEntryModal'); 
+    } 
+
+    function dtCloseDetailsModal() { 
+    dtCloseModal('dtDetailsModal'); 
+    } 
+
+    function dtGenerateReference() { 
+      const programUnit = dtResolvedProgramUnit(); 
+      const documentType = dtResolvedDocumentType(); 
+      const dateCreated = document.getElementById('dtDateCreated').value; 
+      if (!programUnit || !documentType || !dateCreated) { 
+      document.getElementById('dtReferenceNumber').value = ''; 
+      return; 
+      } 
+      if (document.getElementById('dtMode').value === 'edit') return; 
+      google.script.run 
+      .withSuccessHandler(function(ref) { 
+      document.getElementById('dtReferenceNumber').value = ref || ''; 
+      }) 
+      .withFailureHandler(function(err) { 
+      alert(err && err.message ? err.message : 'Failed to generate reference number.'); 
+      }) 
+      .dtGenerateReferenceNumber(programUnit, documentType, dateCreated); 
+    }
+
+
+    function dtResolvedDocumentType() {
+      const select = document.getElementById('dtDocumentType');
+      const custom = document.getElementById('dtDocumentTypeCustom');
+      if (!select) return '';
+      return select.value === '__CUSTOM__'
+        ? String(custom?.value || '').trim()
+        : select.value;
+    }
+
+    function dtToggleCustomDocumentType() {
+      const select = document.getElementById('dtDocumentType');
+      const custom = document.getElementById('dtDocumentTypeCustom');
+      if (!select || !custom) return;
+      const isCustom = select.value === '__CUSTOM__';
+      custom.style.display = isCustom ? 'block' : 'none';
+      custom.disabled = !isCustom;
+      if (!isCustom) custom.value = '';
+    }
+
+    function dtAddCustomChecklistItem(value, checked = true, disabled = false) {
+      const text = String(value || '').trim();
+      if (!text) return;
+      const list = document.getElementById('dtCustomChecklistList');
+      if (!list) return;
+
+      const existing = [...list.querySelectorAll('.dtChecklist')]
+        .find(cb => String(cb.value).toLowerCase() === text.toLowerCase());
+      if (existing) {
+        existing.checked = checked;
+        return;
+      }
+
+      const row = document.createElement('div');
+      row.className = 'custom-checklist-item';
+      row.innerHTML = `
+        <label>
+          <input type="checkbox" class="dtChecklist dtCustomChecklist" value="${dtEscapeHtml(text)}" ${checked ? 'checked' : ''} ${disabled ? 'disabled' : ''}>
+          <span>${dtEscapeHtml(text)}</span>
+        </label>
+        ${disabled ? '' : '<button type="button" class="custom-checklist-remove">Remove</button>'}
+      `;
+      const remove = row.querySelector('.custom-checklist-remove');
+      if (remove) remove.addEventListener('click', () => row.remove());
+      list.appendChild(row);
+    }
+
+    function dtAddCustomChecklistFromInput() {
+      const input = document.getElementById('dtCustomChecklistInput');
+      const value = String(input?.value || '').trim();
+      if (!value) return;
+      dtAddCustomChecklistItem(value, true, false);
+      input.value = '';
+      input.focus();
+    }
+
+    function dtResetCustomChecklist() {
+      const list = document.getElementById('dtCustomChecklistList');
+      if (list) list.innerHTML = '';
+      const input = document.getElementById('dtCustomChecklistInput');
+      if (input) input.value = '';
+    }
+
+    function dtGetFormData() { 
+      const checkedRouting = [...document.querySelectorAll('.dtRouting:checked')].map(cb => cb.value); 
+      const orderedRouting = dtRoutingOrder.filter(v => checkedRouting.includes(v)); 
+      const lastStep = orderedRouting.length ? orderedRouting[orderedRouting.length - 1] : ''; 
+      const routingDetails = lastStep ? [{ 
+      checkpoint: lastStep, 
+      extra: (document.querySelector(`.routing-combo[data-routing="${lastStep}"]`)?.value || '').trim(),
+      timestamp: (document.querySelector(`.routing-time[data-routing="${lastStep}"]`)?.value || '').trim()
+      }] : []; 
+      
+      return { 
+      id: document.getElementById('dtRecordId').value, 
+      mode: document.getElementById('dtMode').value, 
+      programUnit: dtResolvedProgramUnit(), 
+      documentType: dtResolvedDocumentType(), 
+      referenceNumber: document.getElementById('dtReferenceNumber').value, 
+      documentDescription: document.getElementById('dtDocumentDescription').value.trim(), 
+      amount: document.getElementById('dtAmount').value, 
+      dateCreated: document.getElementById('dtDateCreated').value, 
+      assignedLiaison: document.getElementById('dtAssignedLiaison').value, 
+      remarks: document.getElementById('dtRemarks').value.trim(),
+      remarkImageBase64: dtRemarkImageBase64,
+      remarkImageName: dtRemarkImageName, 
+      attachmentLink: document.getElementById('dtAttachmentLink').value.trim(), 
+      checklist: [...document.querySelectorAll('.dtChecklist:checked')].map(cb => cb.value), 
+      selectedRouting: orderedRouting, 
+      lastRouting: orderedRouting.length ? orderedRouting[orderedRouting.length - 1] : '', 
+      routingDetails: routingDetails 
+      }; 
+    }
+
+    function dtValidateForm() { 
+      const requiredFields = [ 
+      { id: 'dtProgramUnit', name: 'Program/Unit' }, 
+      { id: 'dtDocumentType', name: 'Document Type' }, 
+      { id: 'dtDocumentDescription', name: 'Document Description' }, 
+      { id: 'dtDateCreated', name: 'Date Created' } 
+      ]; 
+      for (const field of requiredFields) { 
+      if (field.id === 'dtProgramUnit') {
+        const value = dtResolvedProgramUnit();
+        if (!value || value.trim() === '') {
+          alert(`${field.name} is required.`);
+          document.getElementById('dtProgramUnit').focus();
+          return false;
+        }
+        continue;
+      }
+      const el = document.getElementById(field.id);
+      if (field.id === 'dtDocumentType') {
+        const value = dtResolvedDocumentType();
+        if (!value || value.trim() === '') {
+          alert('Document Type is required.');
+          (document.getElementById('dtDocumentTypeCustom') || el).focus();
+          return false;
+        }
+        continue;
+      }
+      if (!el.value || el.value.trim() === '') { 
+      alert(`${field.name} is required.`); 
+      el.focus(); 
+      return false; 
+      } 
+      } 
+      return true; 
+    } 
+
+    function dtSave() { 
+      if (!dtValidateForm()) return; 
+      const data = dtGetFormData(); 
+      const fn = data.mode === 'edit' ? 'dtUpdateDocument' : 'dtSaveDocument'; 
+      google.script.run 
+      .withSuccessHandler(function() { 
+      dtCloseEntryModal(); 
+      dtResetRemarkImage();
+      dtLoad(); 
+      }) 
+      .withFailureHandler(function(err) { 
+      alert(err && err.message ? err.message : 'Failed to save.'); 
+      })[fn](data); 
+    }
+
+    function dtView(id) { 
+      const d = dtFindRecordById(id); 
+      if (!d) { 
+      alert('Record not found in loaded data.'); 
+      return; 
+      } 
+      const checklist = dtNormalizeArray(d.checklist);
+      dtResetCustomChecklist();
+      const knownChecklistValues = [...document.querySelectorAll('#dtChecklistSection .dtChecklist:not(.dtCustomChecklist)')].map(cb => cb.value);
+      checklist.filter(item => !knownChecklistValues.includes(item)).forEach(item => dtAddCustomChecklistItem(item, true, true)); 
+      const routingDetails = dtNormalizeRoutingDetails(d.routingDetails || d.routing); 
+      document.getElementById('dtDetailsContent').innerHTML = ` 
+      <div class="form-section"> 
+      <h3>${dtEscapeHtml(d.referenceNumber || 'No Reference')}</h3> 
+      <div class="details-grid"> 
+      <div class="details-card"><strong>Program/Unit</strong><span>${dtGetProgramBadge(d.programUnit)}</span></div> 
+      <div class="details-card"><strong>Document Type</strong><span>${dtEscapeHtml(d.documentType || '') || '—'}</span></div> 
+      <div class="details-card"><strong>Description</strong><div>${dtEscapeHtml(d.documentDescription || '') || '—'}</div></div> 
+      <div class="details-card"><strong>Amount</strong><span>${dtFormatPeso(d.amount)}</span></div> 
+      <div class="details-card"><strong>Date Created</strong><span>${dtEscapeHtml(d.dateCreated || '') || '—'}</span></div> 
+      <div class="details-card"><strong>Assigned Liaison</strong><span>${dtEscapeHtml(d.assignedLiaison || '') || '—'}</span></div> 
+      <div class="details-card"><strong>Current Status</strong><span>${dtEscapeHtml(d.currentStatus || '') || '—'}</span></div> 
+      <div class="details-card" style="width: fit-content; height: auto;">
+        <strong>Document Remarks</strong>
+        ${dtFormatRemarksForView(d.remarks)}
+      </div> 
+      </div> 
+      </div> 
+      <div class="form-section"> 
+      <h3>Checklist</h3> 
+      ${ 
+      checklist.length 
+      ? `<div class="history-item"> 
+      <ul class="checklist-bullets"> 
+      ${checklist.map(c => `<li>${dtEscapeHtml(c)}</li>`).join('')} 
+      </ul> 
+      </div>` 
+      : '<div class="history-item">No checklist items selected</div>' 
+      } 
+      </div> 
+      <div class="form-section"> 
+      <h3>Document History</h3> 
+      <div class="history-list">${ 
+      routingDetails.length 
+      ? routingDetails.map(r => ` 
+      <div class="history-item"> 
+      <div class="history-item-title">${dtEscapeHtml(r.checkpoint || '')}</div> 
+      <div class="history-item-meta"> 
+      ${dtEscapeHtml(r.timestamp || '')}${r.extra ? (r.timestamp ? ' • ' : '') + dtEscapeHtml(r.extra) : ''} 
+      </div> 
+      </div> 
+      `).join('') 
+      : '<div class="history-item">No routing yet</div>' 
+      }</div> 
+      </div> 
+      `; 
+      dtOpenModal('dtDetailsModal'); 
+    }
+
+    function dtEdit(id) { 
+      const d = dtFindRecordById(id); 
+      if (!d) { 
+      alert('Record not found in loaded data.'); 
+      return; 
+      } 
+      dtResetFormState(); 
+      dtHideChecklistSection(); 
+      document.getElementById('dtModalTitle').textContent = 'Edit Document'; 
+      document.getElementById('dtMode').value = 'edit'; 
+      document.getElementById('dtRecordId').value = d.id || ''; 
+      dtSetProgramUnitValue(d.programUnit || ''); 
+      {
+        const typeSelect = document.getElementById('dtDocumentType');
+        const customType = document.getElementById('dtDocumentTypeCustom');
+        const knownTypes = [...typeSelect.options].map(o => o.value);
+        if (knownTypes.includes(d.documentType || '')) {
+          typeSelect.value = d.documentType || '';
+          customType.value = '';
+        } else {
+          typeSelect.value = '__CUSTOM__';
+          customType.value = d.documentType || '';
+        }
+        dtToggleCustomDocumentType();
+      } 
+      document.getElementById('dtReferenceNumber').value = d.referenceNumber || ''; 
+      document.getElementById('dtDocumentDescription').value = d.documentDescription || ''; 
+      document.getElementById('dtAmount').value = d.amount || ''; 
+      document.getElementById('dtDateCreated').value = d.dateCreated || ''; 
+      document.getElementById('dtAssignedLiaison').value = d.assignedLiaison || ''; 
+      //document.getElementById('dtRemarks').value = d.remarks || '';
+        //document.getElementById('dtRemarks').disabled = true;
+        dtResetRemarkImage();
+      
+      //ADDED 5PM
+      const historyDiv = document.getElementById('dtRemarksHistory');
+
+        historyDiv.style.display = 'block';
+
+        let remarksHistory = [];
+          try {
+            remarksHistory = JSON.parse(d.remarks || '[]');
+          } catch (e) {
+            remarksHistory = [];
+          }
+
+          historyDiv.innerHTML =
+            remarksHistory.length
+              ? `
+                <div class="history-list">
+                  ${remarksHistory.map(r => `
+                    <div class="history-item">
+                      <div class="history-item-title">
+                        ${dtEscapeHtml(r.remark)}
+                      </div>
+                      <div class="history-item-meta">
+                        ${dtEscapeHtml(r.timestamp)}
+                        ${r.imageUrl ? `
+                        <br>
+                        <img
+                          src="${dtEscapeHtml(dtGetImageSrc(r.imageUrl))}"
+                          class="remark-view-thumb"
+                          alt="Remarks image"
+                          loading="lazy"
+                          onclick="dtOpenImagePreview('${dtEscapeHtml(r.imageUrl)}')"
+                        >
+                      ` : ''}
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              `
+              : '<div class="history-item">No remarks yet</div>';
+
+
+        // Blank textarea for new remark
+        document.getElementById('dtRemarks').value = '';
+        document.getElementById('dtRemarks').disabled = true;
+        dtResetRemarkImage();
+
+
+      document.getElementById('dtAttachmentLink').value = d.attachmentLink || ''; 
+      const checklist = dtNormalizeArray(d.checklist); 
+      document.querySelectorAll('.dtChecklist').forEach(cb => { 
+      cb.checked = checklist.includes(cb.value); 
+      cb.disabled = true; 
+      }); 
+      document.querySelectorAll('.dtRouting').forEach(cb => { 
+      cb.checked = false; 
+      cb.disabled = false; 
+      }); 
+      document.querySelectorAll('.routing-combo').forEach(el => { 
+      el.value = ''; 
+      el.disabled = true; 
+      }); 
+
+
+      dtRoutingOrder = []; 
+      document.getElementById('dtProgramUnit').disabled = true;
+      document.getElementById('dtProgramUnitOther').disabled = true; 
+      document.getElementById('dtDocumentType').disabled = true; 
+      document.getElementById('dtReferenceNumber').disabled = true; 
+      document.getElementById('dtDocumentDescription').disabled = true; 
+      document.getElementById('dtAmount').disabled = false; 
+      document.getElementById('dtDateCreated').disabled = true; 
+
+      dtOpenModal('dtEntryModal'); 
+    } 
+
+    function dtDelete(id) { 
+      if (!confirm('Delete this record?')) return; 
+      google.script.run 
+      .withSuccessHandler(function() { 
+      dtLoad(); 
+      }) 
+      .withFailureHandler(function(err) { 
+      alert(err && err.message ? err.message : 'Failed to delete.'); 
+      }) 
+      .dtDeleteDocument(id); 
+    } 
+
+</script>
