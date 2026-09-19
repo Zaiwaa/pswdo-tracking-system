@@ -1,1 +1,0 @@
-export default function StatCard({label,value,sub,tone='blue',onClick}){const C=onClick?'button':'div';return <C type={onClick?'button':undefined} onClick={onClick} className={`stat-card ${tone} ${onClick?'clickable':''}`}><span>{label}</span><strong>{value}</strong>{sub&&<small>{sub}</small>}{onClick&&<em>View list →</em>}</C>}
