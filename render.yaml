@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: dromic-v6-preview
+    runtime: static
+    branch: v6-preview
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
