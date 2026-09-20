@@ -107,7 +107,7 @@ function Protected({profile,onProfileUpdated}){
     {isOps&&<Route path="/emergency-access" element={<EmergencyAccess/>}/>}
     {isOps&&<Route path="/relief" element={<ReliefTracking/>}/>}
     {isOps&&<Route path="/ffp-distribution" element={<FFPDistribution/>}/>} 
-    {profile.role==='admin'&&<Route path="/admin" element={<Admin/>}/>} 
+    {profile.role==='admin'&&<Route path="/admin" element={<Admin profile={profile}/>}/>} 
     <Route path="*" element={<Navigate to="/" replace/>}/>
   </Routes></Layout>
 }
